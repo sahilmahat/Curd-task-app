@@ -1,27 +1,100 @@
-In this DevOps task, you need to build and deploy a full-stack CRUD application using the MEAN stack (MongoDB, Express, Angular 15, and Node.js). The backend will be developed with Node.js and Express to provide REST APIs, connecting to a MongoDB database. The frontend will be an Angular application utilizing HTTPClient for communication.  
+# MEAN Stack DevOps Deployment
 
-The application will manage a collection of tutorials, where each tutorial includes an ID, title, description, and published status. Users will be able to create, retrieve, update, and delete tutorials. Additionally, a search box will allow users to find tutorials by title.
+This project demonstrates deployment of a full-stack MEAN (MongoDB, Express, Angular 15, Node.js) CRUD application using Docker, Docker Compose, Nginx reverse proxy, and GitHub Actions CI/CD.
 
-## Project setup
+---
 
-### Node.js Server
+## Application URL
 
-cd backend
+The application is live at:
 
-npm install
+http://3.6.7.29
 
-You can update the MongoDB credentials by modifying the `db.config.js` file located in `app/config/`.
+---
 
-Run `node server.js`
+## Features
 
-### Angular Client
+- Create tutorials
+- View tutorials
+- Update tutorials
+- Delete tutorials
+- Search tutorials by title
 
-cd frontend
+---
 
-npm install
+## Architecture
 
-Run `ng serve --port 8081`
+The application uses:
 
-You can modify the `src/app/services/tutorial.service.ts` file to adjust how the frontend interacts with the backend.
+- MongoDB (Database container)
+- Node.js + Express (Backend container)
+- Angular 15 + Nginx (Frontend container)
+- Docker Compose (Service orchestration)
+- GitHub Actions (CI/CD pipeline)
+- AWS EC2 (Deployment server)
 
-Navigate to `http://localhost:8081/`
+Only **port 80** is publicly exposed.
+
+Backend and MongoDB are not publicly accessible.
+
+---
+
+## Docker Setup
+
+Services are managed using Docker Compose.
+
+To run locally:
+docker-compose up -d
+
+To stop:
+docker-compose down
+
+
+
+---
+
+## Reverse Proxy
+
+Nginx is configured to:
+
+- Serve Angular frontend on port 80
+- Forward `/api` requests internally to backend
+
+This ensures secure internal communication.
+
+---
+
+## CI/CD Pipeline
+
+On every push to `main` branch:
+
+1. Docker images are built
+2. Images are pushed to Docker Hub
+3. EC2 server pulls latest images
+4. Containers restart automatically
+
+This enables continuous deployment.
+
+---
+
+## Screenshots
+
+## Screenshots
+
+### Application Running
+![App](screenshots/app.png)
+
+### Docker Containers
+![Docker](screenshots/docker.png)
+
+### Docker Hub Images
+![DockerHub](screenshots/dockerhub.png)
+
+### GitHub Actions Pipeline
+![CI](screenshots/ci.png)
+
+---
+
+## Author
+
+Sahil Mahat
