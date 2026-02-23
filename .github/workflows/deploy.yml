@@ -38,5 +38,6 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             cd ~/crud-dd-task-mean-app
+            docker-compose down
             docker-compose pull
-            docker-compose up -d
+            docker-compose up -d --force-recreate
